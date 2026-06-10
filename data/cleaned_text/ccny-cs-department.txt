@@ -1,0 +1,13 @@
+Title: CCNY Computer Science Department overview
+Source: CCNY Computer Science department page copied manually
+
+Content:
+Computer Science deals with information; its efficient representation and transformation, its communication and security; its storage, retrieval, analysis and display. The areas of specialization include artificial intelligence, computer vision, networking, database systems, computer-human interaction, computer graphics, and numerical and symbolic computation.
+
+The faculty are accomplished researchers who pair their pursuit of research with a serious commitment to teaching in their discipline, supplemented by well defined liberal arts courses available from other departments within City College. The total curriculum is designed to help students develop the skills needed to become competent, articulate, and well-rounded professionals, able to begin careers in research, development, and business.
+
+The faculty enhance their teaching activities with active research programs in areas such as digital signal processing, computer architecture, computer communications, computer security, pattern recognition, image analysis, symbolic computation, software engineering, verification and testing, VLSI, and CAD. Advanced undergraduate students are encouraged to participate in these research efforts.
+
+Students majoring in Computer Science represent the diversity of New York City's population. They share a common bond, which is their commitment to excel in their studies and ultimately succeed in their chosen careers. The Department of Computer Science is committed to providing them with a curriculum that satisfies both the technical demands of today's business and the research needed to meet tomorrow's information requirements.
+
+Contact Information: Akira Kawaguchi, Chair. North Academic Center Room 8/206, 160 Convent Avenue, New York, NY 10031. Phone: 212.650.6632. Email: info-cs@ccny.cuny.edu.

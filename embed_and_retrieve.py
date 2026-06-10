@@ -16,7 +16,7 @@ from typing import Any
 
 DEFAULT_CHUNKS_PATH = Path("data/chunks/chunks.jsonl")
 DEFAULT_DB_DIR = Path("chroma_db")
-DEFAULT_COLLECTION = "ccny_unofficial_guide_chunks"
+DEFAULT_COLLECTION = "ccny_unofficial_guide_chunks_cosine"
 DEFAULT_MODEL = "all-MiniLM-L6-v2"
 DEFAULT_TOP_K = 5
 
@@ -128,12 +128,20 @@ def load_chunks(chunks_path: Path) -> list[StoredChunk]:
 def get_collection(db_dir: Path, collection_name: str):
     chromadb, _ = import_dependencies()
     client = chromadb.PersistentClient(path=str(db_dir))
-    return client.get_or_create_collection(name=collection_name)
+    return client.get_or_create_collection(
+        name=collection_name,
+        metadata={"hnsw:space": "cosine"},
+    )
 
 
 def load_model(model_name: str):
     _, SentenceTransformer = import_dependencies()
-    return SentenceTransformer(model_name)
+    try:
+        return SentenceTransformer(model_name, local_files_only=True)
+    except TypeError:
+        return SentenceTransformer(model_name)
+    except Exception:
+        return SentenceTransformer(model_name)
 
 
 def build_index(
@@ -147,7 +155,11 @@ def build_index(
     collection = get_collection(db_dir, collection_name)
 
     texts = [chunk.text for chunk in chunks]
-    embeddings = model.encode(texts, show_progress_bar=True).tolist()
+    embeddings = model.encode(
+        texts,
+        normalize_embeddings=True,
+        show_progress_bar=True,
+    ).tolist()
 
     collection.upsert(
         ids=[chunk.chunk_id for chunk in chunks],
@@ -176,7 +188,7 @@ def retrieve(
         )
 
     model = load_model(model_name)
-    query_embedding = model.encode([query]).tolist()[0]
+    query_embedding = model.encode([query], normalize_embeddings=True).tolist()[0]
     results = collection.query(
         query_embeddings=[query_embedding],
         n_results=top_k,
@@ -234,6 +246,10 @@ def run_test_queries(
 
 
 def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+
     args = parse_args()
     command = args.command or "test"
 

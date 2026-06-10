@@ -27,7 +27,7 @@ from embed_and_retrieve import (
 
 
 DEFAULT_LLM_MODEL = "llama-3.3-70b-versatile"
-DEFAULT_MIN_CONFIDENT_DISTANCE = 0.7
+DEFAULT_MIN_CONFIDENT_DISTANCE = 0.5
 
 SYSTEM_PROMPT = """You are a grounded question-answering assistant for a CCNY unofficial guide.
 
