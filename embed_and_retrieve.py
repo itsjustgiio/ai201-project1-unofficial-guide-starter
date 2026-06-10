@@ -168,7 +168,6 @@ def retrieve(
     if top_k <= 0:
         raise ValueError("top_k must be greater than 0")
 
-    model = load_model(model_name)
     collection = get_collection(db_dir, collection_name)
 
     if collection.count() == 0:
@@ -176,6 +175,7 @@ def retrieve(
             "The ChromaDB collection is empty. Run `python embed_and_retrieve.py index` first."
         )
 
+    model = load_model(model_name)
     query_embedding = model.encode([query]).tolist()[0]
     results = collection.query(
         query_embeddings=[query_embedding],

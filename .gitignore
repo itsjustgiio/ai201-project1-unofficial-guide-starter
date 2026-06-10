@@ -15,6 +15,7 @@ env/
 # ChromaDB local storage
 chroma_db/
 chroma/
+gradio_*.log
 
 # macOS
 .DS_Store
